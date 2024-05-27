@@ -6,3 +6,5 @@ resource "aws_instance" "app_server" {
     Name = "AppServer"
   }
 }
+
+create and use ec2 module and pass the variable in the module based on the environment variable from the dynamic blocks
