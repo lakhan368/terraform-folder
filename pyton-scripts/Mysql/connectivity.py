@@ -106,3 +106,37 @@ db_host = "your_db_host"
 db_port = "your_db_port"
 
 connection = create_connection(db_name, db_user, db_password, db_host, db_port)
+
+
+
+
+
+
+from sqlalchemy import create_engine
+
+def connect_to_postgres(db_user, db_password, db_host, db_port, db_name):
+    try:
+        # Create an engine instance
+        engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+
+        # Connect to the PostgreSQL server
+        connection = engine.connect()
+        print("Connection to PostgreSQL DB successful")
+        
+        # Close the connection
+        connection.close()
+        print("PostgreSQL connection is closed")
+        return True
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
+
+# Replace these with your actual database credentials
+db_user = "your_db_user"
+db_password = "your_db_password"
+db_host = "your_db_host"
+db_port = "your_db_port"
+db_name = "your_db_name"
+
+connect_to_postgres(db_user, db_password, db_host, db_port, db_name)
