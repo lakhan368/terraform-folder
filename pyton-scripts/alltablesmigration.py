@@ -159,5 +159,91 @@ insert_data_into_postgres(postgres_host, postgres_user, postgres_password, postg
 
 
 
+fetch all tables
+import psycopg
+
+# Replace these values with your database connection details
+host = "mcapostgresdb.c5kacoe2qvcb.us-east-1.rds.amazonaws.com"
+user = "test"
+password = "test1234"
+dbname = "postgressdb"
+port = "5432"
+
+try:
+    # Connect to your PostgreSQL database
+    conn = psycopg.connect(
+        dbname=dbname,
+        user=user,
+        password=password,
+        host=host,
+        port=port
+    )
+    print("Connection successful")
+    
+    # Create a cursor object
+    cur = conn.cursor()
+
+    # Fetch all table names
+    cur.execute("SELECT table_name FROM information_schema.tables WHERE table_schema='public';")
+    tables = cur.fetchall()
+
+    # Loop through each table and fetch its content
+    for table in tables:
+        table_name = table[0]
+        print(f"Table: {table_name}")
+        cur.execute(f"SELECT * FROM {table_name};")
+        rows = cur.fetchall()
+        for row in rows:
+            print(row)
+
+    # Close the cursor and connection
+    cur.close()
+    conn.close()
+
+except Exception as e:
+    print(f"An error occurred: {e}")
+
+delete table
+import psycopg
+
+# Replace these values with your database connection details
+host = "mcapostgresdb.c5kacoe2qvcb.us-east-1.rds.amazonaws.com"
+user = "test"
+password = "test1234"
+dbname = "postgressdb"
+port = "5432"
+
+table_name_to_delete = "employees"
+
+try:
+    # Connect to your PostgreSQL database
+    conn = psycopg.connect(
+        dbname=dbname,
+        user=user,
+        password=password,
+        host=host,
+        port=port
+    )
+    print("Connection successful")
+    
+    # Create a cursor object
+    cur = conn.cursor()
+
+    # Execute a query to delete the table
+    cur.execute(f"DROP TABLE IF EXISTS {table_name_to_delete};")
+    print(f"Table '{table_name_to_delete}' deleted successfully.")
+
+    # Commit the transaction
+    conn.commit()
+
+    # Close the cursor and connection
+    cur.close()
+    conn.close()
+
+except Exception as e:
+    print(f"An error occurred: {e}")
+
+
+
 
 
