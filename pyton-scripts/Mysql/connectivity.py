@@ -79,3 +79,30 @@ password = 'your_password'
 database = 'your_database'
 
 list_tables(host, user, password, database)
+
+import psycopg2
+from psycopg2 import OperationalError
+
+def create_connection(db_name, db_user, db_password, db_host, db_port):
+    connection = None
+    try:
+        connection = psycopg2.connect(
+            database=db_name,
+            user=db_user,
+            password=db_password,
+            host=db_host,
+            port=db_port,
+        )
+        print("Connection to PostgreSQL DB successful")
+    except OperationalError as e:
+        print(f"The error '{e}' occurred")
+    return connection
+
+# Example usage
+db_name = "your_db_name"
+db_user = "your_db_user"
+db_password = "your_db_password"
+db_host = "your_db_host"
+db_port = "your_db_port"
+
+connection = create_connection(db_name, db_user, db_password, db_host, db_port)
