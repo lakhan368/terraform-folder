@@ -1,7 +1,6 @@
 resource "aws_db_instance" "rds_instance" {
   identifier                    = var.identifier             # Change this to your desired identifier
   instance_class                = var.instance_class
-  kms_key_id                    = var.kms_key_id
   vpc_security_group_ids        = var.vpc_security_group_ids
   allocated_storage             = var.allocated_storage
   auto_minor_version_upgrade    = var.auto_minor_version_upgrade
