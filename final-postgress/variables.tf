@@ -9,10 +9,6 @@ variable "instance_class" {
   type        = string
 }
 
-variable "kms_key_id" {
-  description = "(Required) The ARN for the KMS encryption key. If creating an encrypted instance."
-  type        = string
-}
 
 variable "vpc_security_group_ids" {
   description = "List of VPC security groups to associate."
