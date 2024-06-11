@@ -1,3 +1,30 @@
 .terraform
 *.tfstate*
 .terraform.lock.hcl
+
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "rds:DescribeDBInstances",
+        "rds:ListTagsForResource"
+      ],
+      "Resource": [
+        "<RDS-Instance-ARN-1>",
+        "<RDS-Instance-ARN-2>"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "rds-db:connect"
+      ],
+      "Resource": [
+        "arn:aws:rds-db:<region>:<account-id>:dbuser:<db-cluster-id>/*"
+      ]
+    }
+  ]
+}
